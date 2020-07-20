@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.account.AccountDAO;
 import uyen.account.AccountDTO;
 import uyen.activation.ActivationDAO;
@@ -19,7 +20,7 @@ import uyen.activation.ActivationDAO;
  */
 public class ActivateAction {
 
-   // private final static Logger log = Logger.getLogger(ActivateAction.class);
+    private final static Logger log = Logger.getLogger(ActivateAction.class);
     private String code;
     private static final int STATUS_ACTIVE = 2;
     private static final String SUCCESS = "success";
@@ -53,7 +54,7 @@ public class ActivateAction {
                 }
             }
         } catch (SQLException | NamingException ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }

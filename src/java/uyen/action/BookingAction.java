@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.request.CartObject;
 import uyen.resource.ResourceDAO;
 import uyen.resource.ResourceDTO;
@@ -20,7 +21,7 @@ import uyen.util.DataTypeConverter;
  */
 public class BookingAction {
 
-    //private final static Logger log = Logger.getLogger(BookingAction.class);
+    private final static Logger log = Logger.getLogger(BookingAction.class);
     private String resourceId;
     private int idBooking;
     private String quantity;
@@ -53,7 +54,7 @@ public class BookingAction {
             Map request = (Map) ActionContext.getContext().get("request");
             idBooking = resId;
             request.put("REQ_RESULT", "Added to cart!");
-            
+
             /*
             int resource = DataTypeConverter.convertStringToInteger(resourceId);
             RequestDAO dao = new RequestDAO();
@@ -67,7 +68,7 @@ public class BookingAction {
             }*/
             url = SUCCESS;
         } catch (SQLException | NamingException ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }

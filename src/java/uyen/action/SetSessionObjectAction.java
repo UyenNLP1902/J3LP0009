@@ -7,6 +7,7 @@ package uyen.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import uyen.account.AccountDTO;
 import uyen.category.CategoryDAO;
 import uyen.color.ColorDAO;
@@ -18,25 +19,25 @@ import uyen.statusrequest.StatusRequestDAO;
  * @author HP
  */
 public class SetSessionObjectAction {
-    
-    //private final static Logger log = Logger.getLogger(SetSessionObjectAction.class);
+
+    private final static Logger log = Logger.getLogger(SetSessionObjectAction.class);
     private static final String SUCCESS = "success";
     private static final String ACTIVATE = "activate";
     private static final String FAIL = "fail";
-    
+
     private final int STATUS_ACTIVE = 2;
     private final int STATUS_NEW = 1;
-    
+
     public SetSessionObjectAction() {
     }
-    
+
     public String execute() throws Exception {
         String url = FAIL;
-        
+
         try {
             Map session = ActionContext.getContext().getSession();
             AccountDTO dto = (AccountDTO) session.get("ACCOUNT");
-            
+
             if (dto.getStatus() == STATUS_ACTIVE) {
                 url = SUCCESS;
                 session.put("COLOR_DAO", new ColorDAO());
@@ -47,9 +48,9 @@ public class SetSessionObjectAction {
                 url = ACTIVATE;
             }
         } catch (Exception ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }
-    
+
 }

@@ -7,6 +7,7 @@ package uyen.action;
 
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.request.RequestDAO;
 import uyen.util.DataTypeConverter;
 
@@ -15,8 +16,8 @@ import uyen.util.DataTypeConverter;
  * @author HP
  */
 public class DeleteRequestAction {
-    
-    //private final static Logger log = Logger.getLogger(DeleteRequestAction.class);
+
+    private final static Logger log = Logger.getLogger(DeleteRequestAction.class);
     private String id;
     private String fromDate;
     private String toDate;
@@ -24,10 +25,10 @@ public class DeleteRequestAction {
     private String currentPage;
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
-    
+
     public DeleteRequestAction() {
     }
-    
+
     public String execute() throws Exception {
         String url = FAIL;
         try {
@@ -38,49 +39,49 @@ public class DeleteRequestAction {
                 url = SUCCESS;
             }
         } catch (SQLException | NamingException ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }
-    
+
     public String getId() {
         return id;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public String getFromDate() {
         return fromDate;
     }
-    
+
     public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
-    
+
     public String getToDate() {
         return toDate;
     }
-    
+
     public void setToDate(String toDate) {
         this.toDate = toDate;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getCurrentPage() {
         return currentPage;
     }
-    
+
     public void setCurrentPage(String currentPage) {
         this.currentPage = currentPage;
     }
-    
+
 }

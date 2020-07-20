@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.account.AccountCreateErrors;
 import uyen.account.AccountDAO;
 import uyen.account.AccountDTO;
@@ -22,7 +23,7 @@ import uyen.util.EmailHelper;
  */
 public class CreateAccountAction {
 
-    //private final static Logger log = Logger.getLogger(CreateAccountAction.class);
+    private final static Logger log = Logger.getLogger(CreateAccountAction.class);
     private String email;
     private String password;
     private String confirm;
@@ -115,7 +116,7 @@ public class CreateAccountAction {
                         }
                     }
                 } catch (NamingException ex) {
-                    //log.error(ex.getMessage());
+                    log.error(ex.getMessage());
                 }
             }
         } catch (SQLException ex) {

@@ -7,6 +7,7 @@ package uyen.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import uyen.request.CartObject;
 import uyen.util.DataTypeConverter;
 
@@ -16,7 +17,7 @@ import uyen.util.DataTypeConverter;
  */
 public class ManageCartAction {
 
-    //private final static Logger log = Logger.getLogger(ManageCartAction.class);
+    private final static Logger log = Logger.getLogger(ManageCartAction.class);
     private String id;
     private String quantity;
     private String btnAction;
@@ -46,7 +47,7 @@ public class ManageCartAction {
             session.put("CART", cart);
             url = SUCCESS;
         } catch (Exception ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }

@@ -21,6 +21,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 import uyen.account.AccountDTO;
 
 /**
@@ -30,8 +31,7 @@ import uyen.account.AccountDTO;
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
 
-    //private final static Logger log = Logger.getLogger(AuthFilter.class);
-    //private final static Logger log = Logger.getLogger(AuthFilter.class);
+    private final static Logger log = Logger.getLogger(AuthFilter.class);
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -198,7 +198,7 @@ public class AuthFilter implements Filter {
             RequestDispatcher rd = req.getRequestDispatcher(resources);
             rd.forward(request, response);
         } catch (Throwable t) {
-            //log.error(t.getMessage());
+            log.error(t.getMessage());
         }
     }
 

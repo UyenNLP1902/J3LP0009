@@ -7,6 +7,7 @@ package uyen.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 public class LogoutAction {
 
-    //private final static Logger log = Logger.getLogger(LogoutAction.class);
+    private final static Logger log = Logger.getLogger(LogoutAction.class);
     private final String SUCCESS = "success";
     private final String FAIL = "fail";
 
@@ -28,7 +29,7 @@ public class LogoutAction {
             session.clear();
             url = SUCCESS;
         } catch (Exception ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }

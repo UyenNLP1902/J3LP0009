@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.detail.DetailDAO;
 import uyen.detail.DetailDTO;
 import uyen.request.RequestDAO;
@@ -23,7 +24,7 @@ import uyen.util.DataTypeConverter;
  */
 public class AnswerAction {
 
-    // private final static Logger log = Logger.getLogger(AnswerAction.class);
+    private final static Logger log = Logger.getLogger(AnswerAction.class);
     private String btnAction;
     private String id;
     private int reqId;
@@ -101,7 +102,7 @@ public class AnswerAction {
                 url = SUCCESS;
             }*/
         } catch (SQLException | NamingException ex) {
-            //  log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }

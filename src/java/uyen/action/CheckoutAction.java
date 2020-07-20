@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 import uyen.account.AccountDTO;
 import uyen.detail.DetailDAO;
 import uyen.detail.DetailDTO;
@@ -22,7 +23,7 @@ import uyen.resource.ResourceDTO;
  */
 public class CheckoutAction {
 
-    //private final static Logger log = Logger.getLogger(CheckoutAction.class);
+    private final static Logger log = Logger.getLogger(CheckoutAction.class);
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
@@ -58,7 +59,7 @@ public class CheckoutAction {
                 }
             }
         } catch (SQLException | NamingException ex) {
-            //log.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
         return url;
     }
