@@ -60,7 +60,8 @@ public class RequestDAO implements Serializable {
         String searchValue = "";
 
         if (!user.isEmpty()) {
-            searchValue += "req.email LIKE ? AND ";
+//            searchValue += "req.email LIKE ? AND ";
+            searchValue += "acc.name LIKE ? AND ";
         }
 
         if (!resource.isEmpty()) {
@@ -120,6 +121,10 @@ public class RequestDAO implements Serializable {
                 + "ON req.id = dtl.requestId "
                 + "JOIN tblResource res "
                 + "ON res.id = dtl.resourceId ";
+
+        String join2 = "JOIN tblAccount acc "
+                + "ON acc.email = req.email ";
+
         String searchValue = getSearchResult(user, resource, fromDate, toDate, status);
 
         try {
@@ -128,6 +133,10 @@ public class RequestDAO implements Serializable {
             if (!resource.isEmpty()) {
                 sql += join;
             }
+            if (!user.isEmpty()) {
+                sql += join2;
+            }
+            
             sql += "WHERE " + searchValue;
 
             con = DBHelper.makeConnection();
@@ -229,6 +238,8 @@ public class RequestDAO implements Serializable {
                 + "ON req.id = dtl.requestId "
                 + "JOIN tblResource res "
                 + "ON res.id = dtl.resourceId ";
+        String join2 = "JOIN tblAccount acc "
+                + "ON acc.email = req.email ";
         String searchValue = getSearchResult(user, resource, fromDate, toDate, status);
 
         try {
@@ -238,15 +249,17 @@ public class RequestDAO implements Serializable {
             if (!resource.isEmpty()) {
                 sql += join;
             }
+            if (!user.isEmpty()) {
+                sql += join2;
+            }
             sql += "WHERE " + searchValue
                     + " ORDER BY dateRequest ASC "
                     + "OFFSET (? - 1) * ? ROWS "
                     + "FETCH NEXT ? ROWS ONLY";
-
             con = DBHelper.makeConnection();
             stm = con.prepareStatement(sql);
             int index = 1;
-            
+
             if (!user.isEmpty()) {
                 stm.setString(index, "%" + user + "%");
                 index++;
@@ -266,7 +279,7 @@ public class RequestDAO implements Serializable {
                 stm.setTimestamp(index, toDate);
                 index++;
             }
-            
+
             if (status != 0) {
                 stm.setInt(index, status);
                 index++;
@@ -376,7 +389,8 @@ public class RequestDAO implements Serializable {
 
         return count;
     }
-/*
+
+    /*
     public boolean add(String email, int resource)
             throws SQLException, NamingException {
         boolean result = false;
@@ -399,7 +413,7 @@ public class RequestDAO implements Serializable {
         }
         return result;
     }
-*/
+     */
     public boolean accept(int id) throws SQLException, NamingException {
         boolean check = false;
 
@@ -439,7 +453,7 @@ public class RequestDAO implements Serializable {
 
         return check;
     }
-    
+
     public boolean add(String email) throws SQLException, NamingException {
         boolean check = false;
 
@@ -460,7 +474,7 @@ public class RequestDAO implements Serializable {
 
         return check;
     }
-    
+
     public int getLatestId() throws SQLException, NamingException {
         int result = -1;
 
