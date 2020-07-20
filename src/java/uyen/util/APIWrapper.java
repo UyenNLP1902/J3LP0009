@@ -8,6 +8,7 @@ package uyen.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.io.Serializable;
 import uyen.account.AccountDTO;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -16,7 +17,7 @@ import org.apache.http.client.fluent.Request;
  *
  * @author HP
  */
-public class APIWrapper {
+public class APIWrapper implements Serializable {
 
     public static String getAccessToken(String code) throws IOException {
         String response = Request.Post(MyConstrain.GOOGLE_LINK_GET_TOKEN)
@@ -31,7 +32,7 @@ public class APIWrapper {
         String token = jobj.get("access_token").toString().replaceAll("\"", "");
         return token;
     }
-    
+
     public static AccountDTO getAccountInfo(String token) throws IOException {
         String link = MyConstrain.GOOGLE_LINK_GET_USER_INFO + token;
         String response = Request.Get(link).execute().returnContent().asString();

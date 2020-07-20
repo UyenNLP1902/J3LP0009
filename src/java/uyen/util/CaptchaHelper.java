@@ -8,6 +8,7 @@ package uyen.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -19,7 +20,7 @@ import javax.json.JsonReader;
  *
  * @author giang
  */
-public class CaptchaHelper {
+public class CaptchaHelper implements Serializable {
 
     public static boolean verify(String gRecaptchaResponse)
             throws IOException {
@@ -46,7 +47,6 @@ public class CaptchaHelper {
 
             //int responseCode = con.getResponseCode();
             //System.out.println("responseCode=" + responseCode);
-
             // Lấy Input Stream (Luồng đầu vào) của Connection
             // để đọc dữ liệu gửi đến từ Server.
             InputStream is = con.getInputStream();

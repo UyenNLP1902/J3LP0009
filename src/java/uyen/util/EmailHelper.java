@@ -5,6 +5,7 @@
  */
 package uyen.util;
 
+import java.io.Serializable;
 import java.util.Properties;
 import java.util.UUID;
 import javax.mail.Message;
@@ -19,12 +20,12 @@ import javax.mail.internet.MimeMessage;
  *
  * @author HP
  */
-public class EmailHelper {
+public class EmailHelper implements Serializable {
 
     private String toEmail;
     private final String ADMIN_EMAIL = "j3lp0009@gmail.com";
     private final String ADMIN_PSW = "Abc1235713";
-  //  private final String HOST = "localhost";
+    //  private final String HOST = "localhost";
 
     public String getToEmail() {
         return toEmail;
@@ -46,12 +47,12 @@ public class EmailHelper {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         Session session = Session.getInstance(properties,
-          new javax.mail.Authenticator() {
+                new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(ADMIN_EMAIL, ADMIN_PSW);
             }
-          });
+        });
 
         try {
             MimeMessage message = new MimeMessage(session);
@@ -62,7 +63,7 @@ public class EmailHelper {
 
             Transport.send(message);
         } catch (MessagingException ex) {
-            
+
         }
     }
 

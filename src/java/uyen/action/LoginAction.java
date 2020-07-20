@@ -41,8 +41,7 @@ public class LoginAction {
         String url = FAIL;
         try {
             AccountDTO dto = dao.checkLogin(email, password);
-            if (dto != null //&& correct
-                    ) {
+            if (dto != null && correct) {
                 Map session = ActionContext.getContext().getSession();
                 session.put("ACCOUNT", dto);
 

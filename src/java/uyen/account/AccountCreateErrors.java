@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uyen.account;
+
+import java.io.Serializable;
 
 /**
  *
  * @author HP
  */
-public class AccountCreateErrors {
+public class AccountCreateErrors implements Serializable {
 
     private String emailFormatErr;
     private String phoneFormatErr;
@@ -78,6 +79,5 @@ public class AccountCreateErrors {
     public void setEmailIsExisted(String emailIsExisted) {
         this.emailIsExisted = emailIsExisted;
     }
-    
-    
+
 }
