@@ -1,0 +1,92 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <include file="example.xml"/>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default" namespace="/">
+        <action name="">
+            <result type="chain">logout</result>
+        </action>
+        <action name="login_page">
+            <result>login.jsp</result>
+        </action>
+        <action name="create_page">
+            <result>createAccount.jsp</result>
+        </action>
+        <action name="display_page">
+            <result>display.jsp</result>
+        </action>
+        <action name="history_page">
+            <result>history.jsp</result>
+        </action>
+        <action name="process_page">
+            <result>process.jsp</result>
+        </action>
+        <action name="cart_page">
+            <result>cart.jsp</result>
+        </action>
+        <action name="setDao" class="uyen.action.SetSessionObjectAction">
+            <result>display.jsp</result>
+            <result name="activate">activate.jsp</result>
+            <result name="fail">invalid.html</result>
+        </action>
+        <action name="login" class="uyen.action.LoginAction" method="checkLogin">
+            <result type="chain">setDao</result>
+            <result name="fail">invalid.html</result>
+        </action>
+        <action name="logout" class="uyen.action.LogoutAction" method="logout">
+            <result>login.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="create_account" class="uyen.action.CreateAccountAction" method="create">
+            <result>login.jsp</result>
+            <result name="fail">createAccount.jsp</result>
+        </action>
+        <action name="resend" class="uyen.action.ResendAction">
+            <result>activate.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="activate" class="uyen.action.ActivateAction">
+            <result type="chain">setDao</result>
+            <result name="fail">activate.jsp</result>
+        </action>
+        <action name="login_google" class="uyen.action.LoginGoogleAction">
+            <result type="chain">setDao</result>
+            <result name="fail">invalid.html</result>
+        </action>
+        <action name="search" class="uyen.action.SearchAction">
+            <result>display.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="booking" class="uyen.action.BookingAction">
+            <result type="chain">search</result>
+            <result name="fail" type="chain">logout</result>
+        </action>
+        <action name="process" class="uyen.action.ProcessAction">
+            <result>process.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="answer" class="uyen.action.AnswerAction">
+            <result type="chain">process</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="history" class="uyen.action.ViewHistoryAction">
+            <result>history.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="delete" class="uyen.action.DeleteRequestAction">
+            <result type="chain">history</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="manage" class="uyen.action.ManageCartAction">
+            <result>cart.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+        <action name="checkout" class="uyen.action.CheckoutAction">
+            <result>cart.jsp</result>
+            <result name="fail">error.html</result>
+        </action>
+    </package>
+</struts>
